@@ -24,7 +24,7 @@ public class CircleSpawner : MonoBehaviour
         {
             var circle = parent.GetChild(i);
             Vector2 position = circle.GetComponent<RectTransform>().position;
-            spawnPositions.Add(position * resolutionScale);
+            spawnPositions.Add(position);
             StartCoroutine(ClearSpawnPosition(position, circle.GetComponent<Circle>().Lifespan));
         }
     }
