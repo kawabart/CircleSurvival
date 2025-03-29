@@ -8,17 +8,15 @@ public class CircleSpawner : MonoBehaviour
     [SerializeField] private GameObject circleGreenPrefab;
     [SerializeField] private GameObject circleBlackPrefab;
     [SerializeField] private Transform parent;
-    [SerializeField] private RectTransform canvas;
+    [SerializeField] private Canvas canvas;
     [SerializeField] private RectTransform HUD;
     private float spawnTimer = 0;
     private List<Vector2> spawnPositions = new List<Vector2>();
     private float SpawnDelay { get => 3 / (game.Score - (-1f)) + 0.2f; }
     private float MinLifespanGreen { get => 100f / (game.Score - (-66f)) + 0.5f; }
-    private Vector2 resolutionScale;
 
     private void Start()
     {
-        resolutionScale = canvas.GetComponent<RectTransform>().localScale;
 
         for (int i = 0; i < parent.childCount; i++)
         {
@@ -32,16 +30,18 @@ public class CircleSpawner : MonoBehaviour
     private void Update()
     {
         spawnTimer += Time.deltaTime;
+
         if (spawnTimer >= SpawnDelay && Time.deltaTime != 0)
         {
             GameObject circlePrefab = Random.Range(0, 10) > 0 ? circleGreenPrefab : circleBlackPrefab;
-            Vector2 circleSize = circlePrefab.GetComponent<RectTransform>().rect.size;
-            float posX = Random.Range(0 + circleSize.x / 2, canvas.rect.width - circleSize.x / 2) * resolutionScale.x;
-            float posY = Random.Range(0 + circleSize.y / 2, canvas.rect.height - HUD.rect.height - circleSize.y / 2) * resolutionScale.y;
+
+            Vector2 circleSize = circlePrefab.GetComponent<RectTransform>().rect.size * canvas.scaleFactor;
+            float posX = Random.Range(0 + circleSize.x / 2, canvas.pixelRect.width - circleSize.x / 2);
+            float posY = Random.Range(0 + circleSize.y / 2, canvas.pixelRect.height - HUD.rect.height * canvas.scaleFactor - circleSize.y / 2);
             Vector3 newPosition = new Vector2(posX, posY);
 
-            foreach (Vector2 position in spawnPositions)
-                if (Vector2.Distance(position, newPosition) < circleSize.x)
+            foreach (Vector2 occupiedPosition in spawnPositions)
+                if (Vector2.Distance(occupiedPosition, newPosition) < Mathf.Max(circleSize.x, circleSize.y))
                     return;
 
             GameObject newCircle = Instantiate(circlePrefab, parent);

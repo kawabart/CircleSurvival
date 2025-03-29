@@ -945,7 +945,7 @@ MonoBehaviour:
   circleBlackPrefab: {fileID: 4663686625180751126, guid: d3e97e701d816c645bcbbe5f32a58a0d,
     type: 3}
   parent: {fileID: 585530763}
-  canvas: {fileID: 1949668305}
+  canvas: {fileID: 1949668304}
   HUD: {fileID: 700816527}
 --- !u!4 &1650282839
 Transform:
