@@ -9,6 +9,7 @@ public class Game : MonoBehaviour
     [SerializeField] private Text scoreUI;
     [SerializeField] private Text highscoreUI;
     [SerializeField] private GameObject lossPanel;
+    [SerializeField] private GameObject newBestPanel;
     private static event Action GameEnded;
     
     public int Score
@@ -91,7 +92,7 @@ public class Game : MonoBehaviour
             PlayerPrefs.SetInt(Prefs.Highscore.ToString(), score);
             PlayerPrefs.Save();
             highscoreUI.text = "" + highscore;
-            highscoreUI.gameObject.SetActive(true);
+            newBestPanel.SetActive(true);
         }
     }
 }
