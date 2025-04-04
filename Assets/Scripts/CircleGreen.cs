@@ -24,7 +24,7 @@ public class CircleGreen : Circle
 
     protected override void Die()
     {
-        base.Die();
+        enabled = false;    // Disable script (Update), but don't destroy the circle
         Game.EndGame(transform.position);
     }
 
