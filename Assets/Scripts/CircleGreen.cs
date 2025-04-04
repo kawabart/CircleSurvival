@@ -24,8 +24,8 @@ public class CircleGreen : Circle
 
     protected override void Die()
     {
-        Destroy(gameObject);
-        Game.EndGame();
+        base.Die();
+        Game.EndGame(transform.position);
     }
 
     private void SetFillAmount()

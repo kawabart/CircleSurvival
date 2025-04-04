@@ -9,7 +9,9 @@ public class Game : MonoBehaviour
     [SerializeField] private Text scoreUI;
     [SerializeField] private Text highscoreUI;
     [SerializeField] private GameObject lossPanel;
+    [SerializeField] private GameObject explosionEffect;
     [SerializeField] private GameObject newBestPanel;
+    private static event Action<Vector3> GameEnding;
     private static event Action GameEnded;
     
     public int Score
@@ -38,6 +40,7 @@ public class Game : MonoBehaviour
         
         if (SceneManager.GetActiveScene().buildIndex == (int)Scenes.Gameplay)
         {
+            GameEnding += SetExplosionEffect;
             GameEnded += ShowLossPanel;
             GameEnded += UpdateHighscore;
             GameEnded += WaitAfterLoss;
@@ -50,13 +53,20 @@ public class Game : MonoBehaviour
         Time.timeScale = 1;
     }
 
+    public void SetExplosionEffect(Vector3 position)
+    {
+        explosionEffect.transform.position = position;
+        explosionEffect.transform.localPosition += new Vector3(-10, 10, 0);
+    }
+
     private void ShowLossPanel()
     {
         lossPanel.SetActive(true);
     }
 
-    public static void EndGame()
+    public static void EndGame(Vector3 position)
     {
+        GameEnding.Invoke(position);
         GameEnded.Invoke();
         Time.timeScale = 0;
         Handheld.Vibrate();
@@ -72,6 +82,7 @@ public class Game : MonoBehaviour
         yield return new WaitForSecondsRealtime(1);
         yield return new WaitUntil(() => Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Ended || Input.GetMouseButtonUp(0));
 
+        GameEnding -= SetExplosionEffect;
         GameEnded -= ShowLossPanel;
         GameEnded -= UpdateHighscore;
         GameEnded -= WaitAfterLoss;

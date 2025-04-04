@@ -569,7 +569,7 @@ GameObject:
   - component: {fileID: 921207458}
   - component: {fileID: 921207457}
   m_Layer: 5
-  m_Name: Text
+  m_Name: ExplosionText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -621,7 +621,7 @@ MonoBehaviour:
     m_BestFit: 0
     m_MinSize: 1
     m_MaxSize: 180
-    m_Alignment: 1
+    m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
@@ -985,6 +985,7 @@ MonoBehaviour:
   scoreUI: {fileID: 1402238167}
   highscoreUI: {fileID: 1416332378}
   lossPanel: {fileID: 2012194536}
+  explosionEffect: {fileID: 921207455}
   newBestPanel: {fileID: 352051328}
 --- !u!1 &1650282837
 GameObject:

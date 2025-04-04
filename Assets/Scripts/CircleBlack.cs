@@ -4,6 +4,6 @@ public class CircleBlack : Circle
 {
     private void Start()
     {
-        GetComponent<Button>().onClick.AddListener(() => Game.EndGame());
+        GetComponent<Button>().onClick.AddListener(() => Game.EndGame(transform.position));
     }
 }
