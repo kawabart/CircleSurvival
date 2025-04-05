@@ -56,7 +56,7 @@ public class Game : MonoBehaviour
     public void SetExplosionEffect(Vector3 position)
     {
         explosionEffect.transform.position = position;
-        explosionEffect.transform.localPosition += new Vector3(-10, 10, 0);
+        explosionEffect.transform.rotation = Quaternion.Euler(0, 0, UnityEngine.Random.Range(-32f, 32f));
     }
 
     private void ShowLossPanel()
