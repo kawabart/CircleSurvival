@@ -592,7 +592,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 1080, y: 400}
+  m_SizeDelta: {x: 785, y: 205}
   m_Pivot: {x: 0.508, y: 0.45}
 --- !u!114 &921207457
 MonoBehaviour:
@@ -982,6 +982,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1950bbb0afa49d4484da3bb1793899f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canvas: {fileID: 1949668304}
   scoreUI: {fileID: 1402238167}
   highscoreUI: {fileID: 1416332378}
   lossPanel: {fileID: 2012194536}

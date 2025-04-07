@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class Game : MonoBehaviour
 {
+    [SerializeField] private Canvas canvas;
     [SerializeField] private Text scoreUI;
     [SerializeField] private Text highscoreUI;
     [SerializeField] private GameObject lossPanel;
@@ -55,7 +56,9 @@ public class Game : MonoBehaviour
 
     public void SetExplosionEffect(Vector3 position)
     {
-        explosionEffect.transform.position = position;
+        Vector2 size = explosionEffect.GetComponent<RectTransform>().sizeDelta * canvas.scaleFactor;
+        Vector3 newPosition = new Vector3(Mathf.Clamp(position.x, 0 + size.x / 2, canvas.pixelRect.width - size.x / 2), Mathf.Clamp(position.y, 0 + size.y / 2, canvas.pixelRect.height - size.y / 2), position.z);
+        explosionEffect.transform.position = newPosition;
         explosionEffect.transform.rotation = Quaternion.Euler(0, 0, UnityEngine.Random.Range(-32f, 32f));
     }
 
